@@ -1,9 +1,11 @@
-# A barorploncher Flet app
+# BaroRPLoncher
 
-An example of a minimal Flet app.
+## Что это?
+Это - БароРПЛончер. Лаунчер майнкрафта специально для одного проекта.
 
-To run the app:
+## Запук
+Ввести это в командную строку:
 
 ```
-flet run [app_directory]
+flet run [BaroRPLoncher/ или . если командная строка запущена в папке с скриптом]
 ```
