@@ -1,3 +1,5 @@
+import builtins
+import os
 import flet as ft
 import minecraft_launcher_lib as mcl
 # Много мне нужно тут понакодить...
@@ -13,29 +15,38 @@ def main(page: ft.Page):
     # page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.title = "BaroRPLoncher"
     PlayerName = ft.TextField(label="Никнейм")
+    LogTextControl = ft.Text('Великие начала начинаются с великих концов.\n')
+    
+    # Это решение мне предложила нейросеть. Они умнеют!
+    def customloggingprint(*args, **kwargs):
+        log_text = LogTextControl.value + ' '.join(map(str, args)) + '\n'
+        LogTextControl.value = log_text
+        page.update()
+        builtins.print(*args, **kwargs)
+    print = customloggingprint
+
     def on_play_click(e):
-        pass #Надо сделать
+        print("Нерабочий лаунчер, ноутбук в дыму")
     def on_install_click(e):
-        pass #Надо сделать
+        print("Что творит Максимка не понять уму!")
     page.add(
         ft.SafeArea(
             ft.Column(
                 [
-                    ft.Image(f"/assets/no_x.png", height=100, width=100, fit=ft.ImageFit.NONE, repeat=ft.ImageRepeat.NO_REPEAT),
-                    # Я хз почему, но эта херня отказывается работать. Для баланса вселенной я оставил вверху картинку no logs? чтобы она напоминала мне о том что мне нужно сделать
-                    # UPD: Да тут картинки вообще не работают!
-                    # Оказывается что это похоже не у меня одного проблема, ждём пока исправят
 
-                    # ft.Tabs([
-                    #     ft.Tab(text="Лог", content=ft.Container(
-                    #         ft.Image(src="/assets/no_x.jpg", fit=ft.ImageFit.CONTAIN, width=900, height=900), 
-                    #         alignment=ft.alignment.center
-                    #         )
-                    #     )
-                    # ],
-                    # is_secondary=True,
-                    # expand=1
-                    # ),
+                    ft.Tabs(
+                    [
+                        ft.Tab(text="Лог", content=ft.Container(
+                            # ft.Image(src="/assets/no_x.jpg", fit=ft.ImageFit.CONTAIN, width=900, height=900), 
+                            # alignment=ft.alignment.center
+                            # Картинки не работаеют. No images?
+                            LogTextControl
+                            )
+                        )
+                    ],
+                    is_secondary=True,
+                    expand=1
+                    ),
 
                     ft.Row(
                     [
@@ -50,6 +61,8 @@ def main(page: ft.Page):
             expand=1
         )
     )
+
+        
 
 
 ft.app(main)
